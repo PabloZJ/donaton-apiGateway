@@ -1,4 +1,5 @@
 server:
+  address: 0.0.0.0
   port: 8080
 
 spring:
@@ -17,7 +18,10 @@ spring:
                 - Path=/api/donaciones/**
               filters:
                 - StripPrefix=2
-                - Retry=2
+                - name: Retry
+                  args:
+                    retries: 2
+                    methods: GET,POST,PUT,PATCH,DELETE
 
             - id: necesidades
               uri: http://localhost:8082
@@ -25,7 +29,10 @@ spring:
                 - Path=/api/necesidades/**
               filters:
                 - StripPrefix=2
-                - Retry=2
+                - name: Retry
+                  args:
+                    retries: 2
+                    methods: GET,POST,PUT,PATCH,DELETE
 
             - id: logistica
               uri: http://localhost:8083
@@ -33,4 +40,7 @@ spring:
                 - Path=/api/logistica/**
               filters:
                 - StripPrefix=2
-                - Retry=2
+                - name: Retry
+                  args:
+                    retries: 2
+                    methods: GET,POST,PUT,PATCH,DELETE
